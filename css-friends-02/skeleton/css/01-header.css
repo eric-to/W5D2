@@ -47,3 +47,7 @@ body {
 .header-list > li:hover {
   background: #000;
 }
+
+.header-list li:first-child:hover span {
+  background-color: red;
+}
