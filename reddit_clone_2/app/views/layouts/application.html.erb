@@ -11,12 +11,52 @@
   </head>
 
   <body>
+    <div class="banner">
+    </div>
+
     <% if flash[:errors] %>
       <% flash[:errors].each do |error| %>
         <%= error %>
       <% end  %>
     <% end %>
-    
+
+
+    <% if logged_in? %>
+      <nav class="nav-bar">
+
+
+
+        <div class="left-nav">
+          <ul>
+            <li>
+              <a href="<%= new_sub_url %>">New Subreddit</a>
+            </li>
+            <li>
+              <a href="<%= subs_url %>">All Subreddits</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="right-nav">
+          <ul>
+            <li class="username">
+              <%= current_user.username %>
+            </li>
+            <li>
+              <form class="logout" action="<%= session_url %>" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="_method" value="delete">
+                <input id="logout-btn" type="submit" name="" value="Logout">
+              </form>
+            </li>
+          </ul>
+        </div>
+
+      </nav>
+    <% end %>
+
+
+
     <%= yield %>
   </body>
 </html>
